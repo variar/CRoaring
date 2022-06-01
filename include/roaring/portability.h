@@ -175,6 +175,9 @@ static inline int hammingbackup(uint64_t x) {
 }
 
 static inline int hamming(uint64_t x) {
+    if (!croaring_popcnt()) {
+        return hammingbackup(x);
+    }
 #if defined(_WIN64) && defined(_MSC_VER) && !defined(__clang__)
 #ifdef _M_ARM64
   return hammingbackup(x);

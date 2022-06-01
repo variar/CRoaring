@@ -65,6 +65,7 @@ enum croaring_instruction_set {
   CROARING_BMI1 = 0x20,
   CROARING_BMI2 = 0x40,
   CROARING_ALTIVEC = 0x80,
+  CROARING_POPCNT = 0x100,
   CROARING_UNINITIALIZED = 0x8000
 };
 
@@ -127,6 +128,7 @@ static inline uint32_t dynamic_croaring_detect_supported_architectures() {
   static uint32_t cpuid_bmi2_bit = 1 << 8;      ///< @private bit 8 of EBX for EAX=0x7
   static uint32_t cpuid_sse42_bit = 1 << 20;    ///< @private bit 20 of ECX for EAX=0x1
   static uint32_t cpuid_pclmulqdq_bit = 1 << 1; ///< @private bit  1 of ECX for EAX=0x1
+  static uint32_t cpuid_popcnt_bit = 1 << 23;   ///< @private bit 23 of ECX for EAX=0x1
   // ECX for EAX=0x7
   eax = 0x7;
   ecx = 0x0;
@@ -152,6 +154,10 @@ static inline uint32_t dynamic_croaring_detect_supported_architectures() {
 
   if (ecx & cpuid_pclmulqdq_bit) {
     host_isa |= CROARING_PCLMULQDQ;
+  }
+
+  if (ecx & cpuid_popcnt_bit) {
+    host_isa |= CROARING_POPCNT;
   }
 
   return host_isa;
@@ -212,13 +218,24 @@ static inline bool croaring_avx2() {
 }
 #endif
 
+#if defined(__AVX2__)
+static inline bool croaring_popcnt() {
+  return true;
+}
+#else
+static inline bool croaring_popcnt() {
+  return  (croaring_detect_supported_architectures() & CROARING_POPCNT) == CROARING_POPCNT;
+}
+#endif
 
 #else // defined(__x86_64__) || defined(_M_AMD64) // x64
 
 static inline bool croaring_avx2() {
   return false;
 }
-
+static inline bool croaring_popcnt() {
+  return false;
+}
 static inline uint32_t croaring_detect_supported_architectures() {
     // no runtime dispatch
     return dynamic_croaring_detect_supported_architectures();
