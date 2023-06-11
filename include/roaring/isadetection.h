@@ -1,9 +1,5 @@
 #ifndef ROARING_ISADETECTION_H
 #define ROARING_ISADETECTION_H
-#if defined(__x86_64__) || defined(_M_AMD64) // x64
-
-
-
 
 #ifndef CROARING_COMPILER_SUPPORTS_AVX512
 #ifdef __has_include
@@ -39,5 +35,4 @@ int croaring_hardware_support(void);
 #ifdef __cplusplus
 } } }  // extern "C" { namespace roaring { namespace internal {
 #endif
-#endif // x64
 #endif // ROARING_ISADETECTION_H
