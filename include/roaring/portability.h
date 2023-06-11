@@ -66,6 +66,8 @@
 #include <malloc.h>  // this should never be needed but there are some reports that it is needed.
 #endif
 
+#include "isadetection.h"
+
 #ifdef __cplusplus
 extern "C" {  // portability definitions are in global scope, not a namespace
 #endif
@@ -244,8 +246,7 @@ static inline int roaring_leading_zeroes(unsigned long long input_num) { return 
 
 #ifdef CROARING_USENEON
 // we can always compute the popcount fast.
-#elif (defined(_M_ARM) || defined(_M_ARM64)) && ((defined(_WIN64) || defined(_WIN32)) && defined(CROARING_REGULAR_VISUAL_STUDIO) && CROARING_REGULAR_VISUAL_STUDIO)
-// we will need this function:
+#else
 static inline int roaring_hamming_backup(uint64_t x) {
   uint64_t c1 = UINT64_C(0x5555555555555555);
   uint64_t c2 = UINT64_C(0x3333333333333333);
@@ -259,6 +260,9 @@ static inline int roaring_hamming_backup(uint64_t x) {
 
 
 static inline int roaring_hamming(uint64_t x) {
+    if( croaring_hardware_support() & ROARING_SUPPORTS_POPCNT != ROARING_SUPPORTS_POPCNT) {
+        return roaring_hamming_backup(x);
+    }
 #if defined(_WIN64) && defined(CROARING_REGULAR_VISUAL_STUDIO) && CROARING_REGULAR_VISUAL_STUDIO
 #ifdef CROARING_USENEON
    return vaddv_u8(vcnt_u8(vcreate_u8(input_num)));

@@ -82,6 +82,7 @@ enum croaring_instruction_set {
   CROARING_AVX512VBMI2 = 0x800,
   CROARING_AVX512BITALG = 0x1000,
   CROARING_AVX512VPOPCNTDQ = 0x2000,
+  CROARING_POPCNT = 0x4000,
   CROARING_UNINITIALIZED = 0x8000
 };
 
@@ -148,7 +149,7 @@ static inline uint32_t dynamic_croaring_detect_supported_architectures(void) {
   static uint32_t cpuid_sse42_bit = 1 << 20;    ///< @private bit 20 of ECX for EAX=0x1
   static uint32_t cpuid_osxsave = (1 << 26) | (1 << 27); ///< @private bits 26+27 of ECX for EAX=0x1
   static uint32_t cpuid_pclmulqdq_bit = 1 << 1; ///< @private bit  1 of ECX for EAX=0x1
-
+  static uint32_t cpuid_popcnt_bit = 1 << 23;   ///< @private bit 23 of ECX for EAX=0x1
 
   // EBX for EAX=0x1
   eax = 0x1;
@@ -163,6 +164,10 @@ static inline uint32_t dynamic_croaring_detect_supported_architectures(void) {
 
   if (ecx & cpuid_pclmulqdq_bit) {
     host_isa |= CROARING_PCLMULQDQ;
+  }
+
+  if (ecx & cpuid_popcnt_bit) {
+    host_isa |= CROARING_POPCNT;
   }
 
   if ((ecx & cpuid_osxsave) != cpuid_osxsave) {
@@ -287,8 +292,11 @@ int croaring_hardware_support(void) {
     bool has_avx512 = false;
 #if CROARING_COMPILER_SUPPORTS_AVX512
     has_avx512 = (croaring_detect_supported_architectures() & CROARING_AVX512_REQUIRED) == CROARING_AVX512_REQUIRED;
-#endif // CROARING_COMPILER_SUPPORTS_AVX512
-    support = (has_avx2 ? ROARING_SUPPORTS_AVX2 : 0) | (has_avx512 ? ROARING_SUPPORTS_AVX512 : 0);
+#endif // CROARING_COMPILER_SUPPORTS_AVX512 
+    bool has_popcnt = (croaring_detect_supported_architectures() & CROARING_POPCNT) == CROARING_POPCNT;
+    support = (has_avx2 ? ROARING_SUPPORTS_AVX2 : 0) 
+              | (has_avx512 ? ROARING_SUPPORTS_AVX512 : 0)
+              | (has_popcnt ? ROARING_SUPPORTS_POPCNT : 0);
   }
   return support;
 }

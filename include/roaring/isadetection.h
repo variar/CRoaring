@@ -33,6 +33,7 @@ extern "C" { namespace roaring { namespace internal {
 enum {
   ROARING_SUPPORTS_AVX2 = 1,
   ROARING_SUPPORTS_AVX512 = 2,
+  ROARING_SUPPORTS_POPCNT = 4,
 };
 int croaring_hardware_support(void);
 #ifdef __cplusplus
