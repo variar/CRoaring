@@ -260,8 +260,13 @@ static inline int roaring_hamming_backup(uint64_t x) {
 
 
 static inline int roaring_hamming(uint64_t x) {
+#ifdef __cplusplus
     if( (roaring::internal::croaring_hardware_support() & roaring::internal::ROARING_SUPPORTS_POPCNT) 
             != roaring::internal::ROARING_SUPPORTS_POPCNT) {
+#else
+    if( (croaring_hardware_support() & ROARING_SUPPORTS_POPCNT) 
+            != ROARING_SUPPORTS_POPCNT) {
+#endif
         return roaring_hamming_backup(x);
     }
 #if defined(_WIN64) && defined(CROARING_REGULAR_VISUAL_STUDIO) && CROARING_REGULAR_VISUAL_STUDIO
