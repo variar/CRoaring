@@ -90,6 +90,7 @@ enum croaring_instruction_set {
 unsigned int CROARING_AVX512_REQUIRED = (CROARING_AVX512F | CROARING_AVX512DQ | CROARING_AVX512BW | CROARING_AVX512VBMI2 | CROARING_AVX512BITALG | CROARING_AVX512VPOPCNTDQ);
 #endif
 
+
 static inline void cpuid(uint32_t *eax, uint32_t *ebx, uint32_t *ecx,
                          uint32_t *edx) {
 #if CROARING_REGULAR_VISUAL_STUDIO
@@ -224,11 +225,6 @@ static inline uint32_t dynamic_croaring_detect_supported_architectures(void) {
   return host_isa;
 }
 
-#endif // end SIMD extension detection code
-
-
-#if defined(__x86_64__) || defined(_M_AMD64) // x64
-
 #if CROARING_ATOMIC_IMPL == CROARING_ATOMIC_IMPL_CPP
 static inline uint32_t croaring_detect_supported_architectures(void) {
     // thread-safe as per the C++11 standard.
@@ -298,7 +294,6 @@ int croaring_hardware_support(void) {
   return support;
 }
 #endif
-
 #ifdef __cplusplus
 } } }  // extern "C" { namespace roaring { namespace internal {
 #endif
