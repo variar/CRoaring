@@ -256,19 +256,21 @@ static inline int roaring_hamming_backup(uint64_t x) {
   x *= UINT64_C(0x0101010101010101);
   return x >> 56;
 }
+
+static bool is_popcnt_available() {
+#ifdef __cplusplus
+        return (roaring::internal::croaring_hardware_support() & roaring::internal::ROARING_SUPPORTS_POPCNT) 
+                == roaring::internal::ROARING_SUPPORTS_POPCNT;
+#else
+        return (croaring_hardware_support() & ROARING_SUPPORTS_POPCNT) 
+                != ROARING_SUPPORTS_POPCNT;
 #endif
+}
+#endif
+
 
 
 static inline int roaring_hamming(uint64_t x) {
-#ifdef __cplusplus
-    if( (roaring::internal::croaring_hardware_support() & roaring::internal::ROARING_SUPPORTS_POPCNT) 
-            != roaring::internal::ROARING_SUPPORTS_POPCNT) {
-#else
-    if( (croaring_hardware_support() & ROARING_SUPPORTS_POPCNT) 
-            != ROARING_SUPPORTS_POPCNT) {
-#endif
-        return roaring_hamming_backup(x);
-    }
 #if defined(_WIN64) && defined(CROARING_REGULAR_VISUAL_STUDIO) && CROARING_REGULAR_VISUAL_STUDIO
 #ifdef CROARING_USENEON
    return vaddv_u8(vcnt_u8(vcreate_u8(input_num)));
@@ -276,17 +278,18 @@ static inline int roaring_hamming(uint64_t x) {
   return roaring_hamming_backup(x);
   // (int) _CountOneBits64(x); is unavailable
 #else  // _M_ARM64
-  return (int) __popcnt64(x);
+  return is_popcnt_available() ? ((int) __popcnt64(x)) : roaring_hamming_backup(x);
 #endif // _M_ARM64
 #elif defined(_WIN32) && defined(CROARING_REGULAR_VISUAL_STUDIO) && CROARING_REGULAR_VISUAL_STUDIO
 #ifdef _M_ARM
   return roaring_hamming_backup(x);
   // _CountOneBits is unavailable
 #else // _M_ARM
-    return (int) __popcnt(( unsigned int)x) + (int)  __popcnt(( unsigned int)(x>>32));
+    return is_popcnt_available() ? ((int) __popcnt(( unsigned int)x) + (int)  __popcnt(( unsigned int)(x>>32))) 
+                                 : roaring_hamming_backup(x);
 #endif // _M_ARM
 #else
-    return __builtin_popcountll(x);
+    return is_popcnt_available() ? __builtin_popcountll(x) : roaring_hamming_backup(x);
 #endif
 }
 

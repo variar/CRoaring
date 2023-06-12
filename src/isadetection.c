@@ -260,7 +260,7 @@ int croaring_hardware_support(void) {
 
 #elif defined(__AVX512F__) && defined(__AVX512DQ__) && defined(__AVX512BW__) && defined(__AVX512VBMI2__) && defined(__AVX512BITALG__) && defined(__AVX512VPOPCNTDQ__)
 int croaring_hardware_support(void) {
-    return  ROARING_SUPPORTS_AVX2 | ROARING_SUPPORTS_AVX512;
+    return  ROARING_SUPPORTS_AVX2 | ROARING_SUPPORTS_AVX512 | ROARING_SUPPORTS_POPCNT;
 }
 #elif defined(__AVX2__)
 
@@ -272,7 +272,7 @@ int croaring_hardware_support(void) {
     avx512_support =  ( (croaring_detect_supported_architectures() & CROARING_AVX512_REQUIRED)
 	                        == CROARING_AVX512_REQUIRED);
 #endif
-    support = ROARING_SUPPORTS_AVX2 | (avx512_support ? ROARING_SUPPORTS_AVX512 : 0);
+    support = ROARING_SUPPORTS_AVX2 | (avx512_support ? ROARING_SUPPORTS_AVX512 : 0) | ROARING_SUPPORTS_POPCNT;
   }
   return support;
 }
