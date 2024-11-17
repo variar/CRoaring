@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['roaring_199',['roaring',['../d1/d51/classroaring_1_1Roaring.html#ab947d795184f735a184b7a27ad76ec64',1,'roaring::Roaring']]]
+  ['key_620',['key',['../db/d0d/structroaring__bulk__context__s.html#af3dbd91adf2ee030dfc44a527eecdc91',1,'roaring_bulk_context_s']]]
 ];

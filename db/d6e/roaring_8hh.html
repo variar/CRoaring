@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">CRoaring
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">4.2.1</span>
    </div>
    <div id="projectbrief">Roaring bitmaps in C (and C++)</div>
   </td>
@@ -89,27 +89,31 @@ $(document).ready(function(){initNavTree('db/d6e/roaring_8hh.html','../../'); in
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">roaring.hh File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdarg&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cstdarg&gt;</code><br />
 <code>#include &lt;initializer_list&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;new&gt;</code><br />
 <code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
-<code>#include &lt;roaring/roaring.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="../../dc/d56/roaring_8h_source.html">roaring/roaring.h</a>&gt;</code><br />
 <code>#include &lt;roaring/roaring_array.h&gt;</code><br />
 </div>
 <p><a href="../../db/d6e/roaring_8hh_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d7d/classroaring_1_1BulkContext.html">roaring::BulkContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d51/classroaring_1_1Roaring.html">roaring::Roaring</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d37/classroaring_1_1RoaringSetBitForwardIterator.html">roaring::RoaringSetBitForwardIterator</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d70/classroaring_1_1RoaringSetBitBiDirectionalIterator.html">roaring::RoaringSetBitBiDirectionalIterator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -125,6 +129,11 @@ Macros</h2></td></tr>
 <tr class="separator:a14763ef48ed276d856563d6a3673f64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa885eec7267b6eb2b4a12bd2f8689203"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d6e/roaring_8hh.html#aa885eec7267b6eb2b4a12bd2f8689203">ROARING_API_NOT_IN_GLOBAL_NAMESPACE</a></td></tr>
 <tr class="separator:aa885eec7267b6eb2b4a12bd2f8689203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a142bf6f3a98ccaf1147d55b4b83a15b0"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db7/namespaceroaring.html#a142bf6f3a98ccaf1147d55b4b83a15b0">roaring::RoaringSetBitForwardIterator</a> = RoaringSetBitBiDirectionalIterator</td></tr>
+<tr class="separator:a142bf6f3a98ccaf1147d55b4b83a15b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aa885eec7267b6eb2b4a12bd2f8689203"></a>

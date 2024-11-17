@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['map_5fbegin_195',['map_begin',['../d3/d48/classroaring_1_1Roaring64MapSetBitBiDirectionalIterator.html#adf19498eb47bfe001df245f896ef4c77',1,'roaring::Roaring64MapSetBitBiDirectionalIterator']]],
-  ['map_5fend_196',['map_end',['../df/d71/classroaring_1_1Roaring64MapSetBitForwardIterator.html#a2d7ae6deb219769489018dcccf08abcf',1,'roaring::Roaring64MapSetBitForwardIterator']]],
-  ['map_5fiter_197',['map_iter',['../df/d71/classroaring_1_1Roaring64MapSetBitForwardIterator.html#a134a9519d93372ffd7fb897f6dac4ac1',1,'roaring::Roaring64MapSetBitForwardIterator']]]
+  ['has_5fvalue_614',['has_value',['../da/d27/structroaring__uint32__iterator__s.html#a99e95f8cbd08320c6ac27b1569ca6bb4',1,'roaring_uint32_iterator_s']]],
+  ['high_5fbytes_615',['high_bytes',['../df/dce/structroaring64__bulk__context__s.html#a3dad528d3cc158f622898442e311044b',1,'roaring64_bulk_context_s']]],
+  ['high_5flow_5fcontainer_616',['high_low_container',['../dd/d7a/structroaring__bitmap__s.html#acf42856216e3a50da302ef1c34269d19',1,'roaring_bitmap_s']]],
+  ['highbits_617',['highbits',['../da/d27/structroaring__uint32__iterator__s.html#ab133b03c8a997b36abeece06dbf909d7',1,'roaring_uint32_iterator_s']]]
 ];

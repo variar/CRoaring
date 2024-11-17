@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pointer_204',['pointer',['../da/d37/classroaring_1_1RoaringSetBitForwardIterator.html#a88ae3f9d1d9283e061302b3bbecc350c',1,'roaring::RoaringSetBitForwardIterator::pointer()'],['../df/d71/classroaring_1_1Roaring64MapSetBitForwardIterator.html#ae49d4a0377abfd3ddf2a1d98f42710ad',1,'roaring::Roaring64MapSetBitForwardIterator::pointer()']]]
+  ['pointer_629',['pointer',['../d5/d70/classroaring_1_1RoaringSetBitBiDirectionalIterator.html#afeb1510b45a1f73e6911ba4e8228e57d',1,'roaring::RoaringSetBitBiDirectionalIterator::pointer()'],['../d3/d48/classroaring_1_1Roaring64MapSetBitBiDirectionalIterator.html#a3eabe74ef801052a998773237d5a427e',1,'roaring::Roaring64MapSetBitBiDirectionalIterator::pointer()']]]
 ];
